@@ -1,2 +1,2 @@
-ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="276f", RUN+="/home/pi/git-projects/garmin-upload/scripts/upload.sh"
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="276f", RUN+="/home/pi/pi-garmin-upload/scripts/upload.sh"
 
