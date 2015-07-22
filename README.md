@@ -5,7 +5,7 @@ Create an Application at https://www.strava.com/settings/api, then generate an o
 ```
 https://www.strava.com/oauth/authorize?client_id={app_id}&response_type=code&redirect_uri={callback url}&approval_prompt=force&scope=write  
 ```
-The OAUTH code is returned in the callback url after allowing access on this screen. e.g. `code=7ff6d78b492bcd2e467b3035714809d3d77a9c6b`
+The OAUTH code is returned in the callback url after allowing access on this screen. e.g. `code=60509bc59d76dac4897df0a78f2b9983948fabc`
 
 This code, the application id, and the client secret key (both available on the Strava api settings page) should be added to the `api.properties` file.
 ```
