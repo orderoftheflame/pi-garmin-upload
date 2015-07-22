@@ -37,8 +37,9 @@ public class GarminUploadApp {
         StravaActivity activity = strava.getActivity(351013934);
 
         LOG.info(activity.getDistance());
+        LOG.info(activity.getElapsedTime());
         LOG.info(activity.getName());
-        LOG.info(activity.getAthlete().getLastname());
+        LOG.info(strava.getAthlete(activity.getAthlete().getId()).getFirstname());
         LOG.info(activity.getGear().getName());
 
 
