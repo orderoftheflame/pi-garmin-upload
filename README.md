@@ -1,9 +1,11 @@
 # pi-garmin-upload
 Uploads from a connected Garmin GPS device to strava.
-##Prerequisits
-```
-$ sudo apt-get install usbmount
-```
+##Mounting device
+Find the device(s) using `blkid` and create a new entry in `/etc/fstab` using your editor of choice.
+'''
+/dev/sdb        /media/fr15     vfat    defaults          0       0
+'''
+Once this is done, mount the device using `sudo mount -a`.
 ## Setup
 ### Clone repo
 Clone the repository into `/home/pi` (or another location and change paths in filepaths in files).
