@@ -8,6 +8,7 @@ import javastrava.api.v3.service.Strava;
 import javastrava.api.v3.service.exception.BadRequestException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import java.util.Arrays;
 
 public class GarminUploadApp {
 
@@ -16,6 +17,9 @@ public class GarminUploadApp {
     private static PropertiesService propertiesService = new PropertiesService();
 
     public static void main(String[] args) {
+
+	LOG.info(Arrays.toString(args));
+
         Token token = null;
 
         int clientId = Integer.parseInt(propertiesService.getProperties().getProperty("api.clientid"));
