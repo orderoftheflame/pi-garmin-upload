@@ -3,6 +3,7 @@ package co.ootf.garmin;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +18,7 @@ public class PropertiesService {
         if (properties == null) {
             properties = new Properties();
             String propFileName = "api.properties";
-            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);) {
+            try (InputStream inputStream = new FileInputStream("./" + propFileName)) {
 
 
                 if (inputStream != null) {
