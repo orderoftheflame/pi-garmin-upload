@@ -14,9 +14,9 @@ api.secret=632c7a0023024997ebe515583c72391700badabc
 api.code=60509bc59d76dac4897df0a78f2b9983948fabc
 ```
 ##Mounting device
-Find the device(s) using `blkid` and create a new entry in `/etc/fstab` using your editor of choice.
+Find the device(s) using `ls -l /dev/disk/by-label` and create a new entry in `/etc/fstab` using your editor of choice.
 ```
-/dev/sdb        /media/fr15     vfat    defaults          0       0
+LABEL=GARMINFR15         /media/fr15     vfat    defaults          0       0
 ```
 Once this is done, mount the device using `sudo mount -a`.
 ## Setup
