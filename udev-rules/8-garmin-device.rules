@@ -1,2 +1,3 @@
-ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="276f", RUN+="/home/pi/pi-garmin-upload/scripts/upload.sh /media/fr15"
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="276f", RUN+="/home/pi/pi-garmin-upload/scripts/run.sh /media/fr15"
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="240c", RUN+="/home/pi/pi-garmin-upload/scripts/run.sh /media/e500"
 
