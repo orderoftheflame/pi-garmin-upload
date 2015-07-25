@@ -56,7 +56,7 @@ public class GarminUploadApp {
 
         Strava strava = new Strava(token);
         int fileCount = 0;
-        if (activitiesFolder != null || activitiesFolder.listFiles().length < 1) {
+        if (activitiesFolder != null && activitiesFolder.listFiles().length > 0) {
             for (File file : activitiesFolder.listFiles()) {
 
                 LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
