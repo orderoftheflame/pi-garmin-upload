@@ -1,5 +1,6 @@
 package co.ootf.garmin;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -18,11 +19,15 @@ public class PropertiesService {
     public static final String DEVICE_ACTIVITIES = "device.activities.";
     private Properties properties;
 
-    public Properties getProperties() {
+    public Properties getProperties(String propertiesFile) {
         if (properties == null) {
             properties = new Properties();
+
             String propFileName = "api.properties";
-            try (InputStream inputStream = new FileInputStream("./" + propFileName)) {
+            if (StringUtils.isEmpty(propertiesFile)) {
+                propertiesFile = "./" + propFileName;
+            }
+            try (InputStream inputStream = new FileInputStream(propertiesFile)) {
 
 
                 if (inputStream != null) {

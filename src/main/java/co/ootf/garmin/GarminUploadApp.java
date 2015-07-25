@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
+import java.util.Properties;
 
 public class GarminUploadApp {
 
@@ -22,6 +23,8 @@ public class GarminUploadApp {
     public static void main(String[] args) {
         File activitiesFolder = null;
         String deviceName = null;
+        Properties properties = null;
+
         if (args.length > 0) {
             String path = args[0];
             if (StringUtils.isEmpty(path)) {
@@ -33,7 +36,10 @@ public class GarminUploadApp {
             if (!path.endsWith("/")) {
                 path = path + "/";
             }
-            activitiesFolder = new File(path + propertiesService.getProperties().getProperty(PropertiesService.DEVICE_ACTIVITIES + deviceName));
+
+            properties = getProperties(args);
+
+            activitiesFolder = new File(path + properties.getProperty(PropertiesService.DEVICE_ACTIVITIES + deviceName));
         }
 
 
@@ -42,7 +48,7 @@ public class GarminUploadApp {
 
         int fileCount = 0;
         if (activitiesFolder != null && activitiesFolder.listFiles().length > 0) {
-            Strava strava = getStravaInstance();
+            Strava strava = getStravaInstance(properties);
             for (File file : activitiesFolder.listFiles()) {
 
                 LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
@@ -64,12 +70,22 @@ public class GarminUploadApp {
         }
     }
 
-    private static Strava getStravaInstance() {
+    private static Properties getProperties(String[] args) {
+        Properties properties;
+        String propertiesLocation = null;
+        if (args.length < 1) {
+            propertiesLocation = args[1];
+        }
+        properties = propertiesService.getProperties(propertiesLocation);
+        return properties;
+    }
+
+    private static Strava getStravaInstance(Properties properties) {
         Token token = null;
 
-        int clientId = Integer.parseInt(propertiesService.getProperties().getProperty(PropertiesService.API_CLIENTID));
-        String secret = propertiesService.getProperties().getProperty(PropertiesService.API_SECRET);
-        String code = propertiesService.getProperties().getProperty(PropertiesService.API_CODE);
+        int clientId = Integer.parseInt(properties.getProperty(PropertiesService.API_CLIENTID));
+        String secret = properties.getProperty(PropertiesService.API_SECRET);
+        String code = properties.getProperty(PropertiesService.API_CODE);
 
         try {
 
