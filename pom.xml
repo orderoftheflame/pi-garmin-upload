@@ -12,6 +12,7 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -22,6 +23,12 @@
             <groupId>com.github.danshannon</groupId>
             <artifactId>javastrava-api</artifactId>
             <version>1.0.0-RC1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
         </dependency>
 
     </dependencies>

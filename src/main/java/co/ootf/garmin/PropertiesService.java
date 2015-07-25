@@ -15,6 +15,7 @@ public class PropertiesService {
     public static final String API_CLIENTID = "api.clientid";
     public static final String API_SECRET = "api.secret";
     public static final String API_CODE = "api.code";
+    public static final String DEVICE_ACTIVITIES = "device.activities.";
     private Properties properties;
 
     public Properties getProperties() {
