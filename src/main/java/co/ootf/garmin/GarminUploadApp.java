@@ -42,13 +42,11 @@ public class GarminUploadApp {
             activitiesFolder = new File(path + properties.getProperty(PropertiesService.DEVICE_ACTIVITIES + deviceName));
         }
 
-
-        LOG.info(deviceName);
-
-
         int fileCount = 0;
         if (activitiesFolder != null && activitiesFolder.listFiles().length > 0) {
             Strava strava = getStravaInstance(properties);
+
+            LOG.info("Device found: " + deviceName);
             for (File file : activitiesFolder.listFiles()) {
 
                 LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
@@ -56,7 +54,6 @@ public class GarminUploadApp {
                 final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
 
                 LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
-                LOG.debug("*** UPLOAD ERROR: " + uploadResponse.getError());
 
                 if (uploadResponse.getError() == null) {
                     LOG.info("Upload appears to have been successful, deleting file.");
