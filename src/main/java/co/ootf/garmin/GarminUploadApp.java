@@ -73,7 +73,7 @@ public class GarminUploadApp {
     private static Properties getProperties(String[] args) {
         Properties properties;
         String propertiesLocation = null;
-        if (args.length < 1) {
+        if (args.length > 1) {
             propertiesLocation = args[1];
         }
         properties = propertiesService.getProperties(propertiesLocation);
