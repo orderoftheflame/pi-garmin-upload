@@ -3,6 +3,4 @@ api.secret=XXX
 api.code=XXX
 
 device.activities.fr15=GARMIN/ACTIVITY/
-device.type.fr15=run
 device.activities.e500=Garmin/Activities/
-device.type.e500=ride
