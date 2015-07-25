@@ -3,7 +3,6 @@ package co.ootf.garmin;
 import javastrava.api.v3.auth.AuthorisationService;
 import javastrava.api.v3.auth.impl.retrofit.AuthorisationServiceImpl;
 import javastrava.api.v3.auth.model.Token;
-import javastrava.api.v3.model.StravaActivity;
 import javastrava.api.v3.model.StravaUploadResponse;
 import javastrava.api.v3.service.Strava;
 import javastrava.api.v3.service.exception.BadRequestException;
@@ -12,14 +11,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
-import java.util.Arrays;
 
 public class GarminUploadApp {
 
-    private static final Log LOG = LogFactory.getLog(GarminUploadApp.class);
     public static final boolean PRIVATE_DEBUG = true;
     public static final String DATA_TYPE = "fit";
-
+    private static final Log LOG = LogFactory.getLog(GarminUploadApp.class);
     private static PropertiesService propertiesService = new PropertiesService();
 
     public static void main(String[] args) {
@@ -59,22 +56,26 @@ public class GarminUploadApp {
 
         Strava strava = new Strava(token);
         int fileCount = 0;
-        for (File file : activitiesFolder.listFiles()) {
+        if (activitiesFolder != null || activitiesFolder.listFiles().length < 1) {
+            for (File file : activitiesFolder.listFiles()) {
 
-            LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
+                LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
 
-            final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
+                final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
 
-            LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
-            LOG.debug("*** UPLOAD ERROR: " + uploadResponse.getError());
+                LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
+                LOG.debug("*** UPLOAD ERROR: " + uploadResponse.getError());
 
-            if (uploadResponse.getError() == null) {
-                LOG.info("Upload appears to have been successful, deleting file.");
-                file.delete();
+                if (uploadResponse.getError() == null) {
+                    LOG.info("Upload appears to have been successful, deleting file.");
+                    file.delete();
+                }
+
             }
 
+        } else {
+            LOG.info("No files found on this device.");
         }
-
     }
 
 }
