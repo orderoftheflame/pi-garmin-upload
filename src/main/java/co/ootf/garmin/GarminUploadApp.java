@@ -39,24 +39,10 @@ public class GarminUploadApp {
 
         LOG.info(deviceName);
 
-        Token token = null;
 
-        int clientId = Integer.parseInt(propertiesService.getProperties().getProperty(PropertiesService.API_CLIENTID));
-        String secret = propertiesService.getProperties().getProperty(PropertiesService.API_SECRET);
-        String code = propertiesService.getProperties().getProperty(PropertiesService.API_CODE);
-
-        try {
-
-            AuthorisationService service = new AuthorisationServiceImpl();
-            token = service.tokenExchange(clientId, secret, code);
-        } catch (BadRequestException e) {
-            LOG.error("Please register a Strava Application at \"https://www.strava.com/settings/api\"", e);
-            System.exit(-1);
-        }
-
-        Strava strava = new Strava(token);
         int fileCount = 0;
         if (activitiesFolder != null && activitiesFolder.listFiles().length > 0) {
+            Strava strava = getStravaInstance();
             for (File file : activitiesFolder.listFiles()) {
 
                 LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
@@ -76,6 +62,24 @@ public class GarminUploadApp {
         } else {
             LOG.info("No files found on this device.");
         }
+    }
+
+    private static Strava getStravaInstance() {
+        Token token = null;
+
+        int clientId = Integer.parseInt(propertiesService.getProperties().getProperty(PropertiesService.API_CLIENTID));
+        String secret = propertiesService.getProperties().getProperty(PropertiesService.API_SECRET);
+        String code = propertiesService.getProperties().getProperty(PropertiesService.API_CODE);
+
+        try {
+
+            AuthorisationService service = new AuthorisationServiceImpl();
+            token = service.tokenExchange(clientId, secret, code);
+        } catch (BadRequestException e) {
+            LOG.error("Please register a Strava Application at \"https://www.strava.com/settings/api\"", e);
+            System.exit(-1);
+        }
+        return new Strava(token);
     }
 
 }
