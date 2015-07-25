@@ -12,6 +12,9 @@ import java.util.Properties;
 public class PropertiesService {
 
     private static final Log LOG = LogFactory.getLog(PropertiesService.class);
+    public static final String API_CLIENTID = "api.clientid";
+    public static final String API_SECRET = "api.secret";
+    public static final String API_CODE = "api.code";
     private Properties properties;
 
     public Properties getProperties() {

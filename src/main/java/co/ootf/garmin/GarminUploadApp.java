@@ -22,9 +22,9 @@ public class GarminUploadApp {
 
         Token token = null;
 
-        int clientId = Integer.parseInt(propertiesService.getProperties().getProperty("api.clientid"));
-        String secret = propertiesService.getProperties().getProperty("api.secret");
-        String code = propertiesService.getProperties().getProperty("api.code");
+        int clientId = Integer.parseInt(propertiesService.getProperties().getProperty(PropertiesService.API_CLIENTID));
+        String secret = propertiesService.getProperties().getProperty(PropertiesService.API_SECRET);
+        String code = propertiesService.getProperties().getProperty(PropertiesService.API_CODE);
 
         try {
 
@@ -34,7 +34,6 @@ public class GarminUploadApp {
             LOG.error("Please register a Strava Application at \"https://www.strava.com/settings/api\"", e);
             System.exit(-1);
         }
-
 
         Strava strava = new Strava(token);
 
@@ -46,9 +45,6 @@ public class GarminUploadApp {
         LOG.info(strava.getAthlete(activity.getAthlete().getId()).getFirstname());
         LOG.info(activity.getGear().getName());
 
-
     }
-
-
 
 }
