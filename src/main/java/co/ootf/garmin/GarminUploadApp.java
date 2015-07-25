@@ -58,21 +58,22 @@ public class GarminUploadApp {
         }
 
         Strava strava = new Strava(token);
-
+        int fileCount = 0;
         for (File file : activitiesFolder.listFiles()) {
+
+            LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
 
             final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
 
-            LOG.info("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
+            LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
+            LOG.debug("*** UPLOAD ERROR: " + uploadResponse.getError());
+
+            if (uploadResponse.getError() == null) {
+                LOG.info("Upload appears to have been successful, deleting file.");
+                file.delete();
+            }
 
         }
-//        StravaActivity activity = strava.getActivity(351013934);
-//
-//        LOG.info(activity.getDistance());
-//        LOG.info(activity.getElapsedTime());
-//        LOG.info(activity.getName());
-//        LOG.info(strava.getAthlete(activity.getAthlete().getId()).getFirstname());
-//        LOG.info(activity.getGear().getName());
 
     }
 
