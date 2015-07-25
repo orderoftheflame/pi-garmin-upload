@@ -61,6 +61,8 @@ public class GarminUploadApp {
                 if (uploadResponse.getError() == null) {
                     LOG.info("Upload appears to have been successful, deleting file.");
                     file.delete();
+                } else {
+                    LOG.error("File failed to upload. Have not deleted. Error: " + uploadResponse.getError() + " Status: " + uploadResponse.getStatus());
                 }
 
             }
