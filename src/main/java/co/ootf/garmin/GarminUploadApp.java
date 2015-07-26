@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class GarminUploadApp {
 
-    public static final boolean PRIVATE_DEBUG = true;
+    public static final boolean PRIVATE_DEBUG = false;
     public static final String DATA_TYPE = "fit";
     private static final Log LOG = LogFactory.getLog(GarminUploadApp.class);
     private static PropertiesService propertiesService = new PropertiesService();
