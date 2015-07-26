@@ -3,4 +3,4 @@
 FOLDER=$1;
 sudo mount $FOLDER;
 sleep 5;
-sudo tree $FOLDER | mail -s "Device connect test" ben@ootf.co.uk;
+sudo java -jar /home/pi/pi-garmin-upload/release/pi-garmin-upload.jar $FOLDER /home/pi/api.properties | mail -s "Device upload complete: $FOLDER" ben@ootf.co.uk;
