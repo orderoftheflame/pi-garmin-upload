@@ -43,7 +43,7 @@ public class GarminUploadApp {
         }
 
         int fileCount = 0;
-        if (activitiesFolder != null && activitiesFolder.listFiles().length > 0) {
+        if (activitiesFolder != null && activitiesFolder.exists() && activitiesFolder.listFiles().length > 0) {
             Strava strava = getStravaInstance(properties);
 
             LOG.info("Device found: " + deviceName);
