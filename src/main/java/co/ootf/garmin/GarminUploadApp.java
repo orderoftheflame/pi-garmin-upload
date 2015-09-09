@@ -57,9 +57,9 @@ public class GarminUploadApp {
 
                 if (uploadResponse.getError() == null) {
                     LOG.info("Upload appears to have been successful, deleting file.");
-                    file.delete();
+                    file.renameTo(new File("/media/200gb/garmin/" + file.getName()));
                 } else {
-                    LOG.error("File failed to upload. Have not deleted. Error: " + uploadResponse.getError() + " Status: " + uploadResponse.getStatus());
+                    LOG.error("File failed to upload. Have not moved. Error: " + uploadResponse.getError() + " Status: " + uploadResponse.getStatus());
                 }
 
             }
