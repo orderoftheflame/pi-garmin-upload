@@ -11,6 +11,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Properties;
 
 public class GarminUploadApp {
@@ -57,6 +59,11 @@ public class GarminUploadApp {
 
                 if (uploadResponse.getError() == null) {
                     LOG.info("Upload appears to have been successful, deleting file.");
+                    try {
+                        Files.move(file.toPath(), file.toPath().resolveSibling(file.getName() + "_uploaded"));
+                    } catch (IOException e) {
+                        LOG.error("Failed to move", e);
+                    }
                     file.renameTo(new File(file.getAbsolutePath() + "_uploaded"));
                 } else {
                     LOG.error("File failed to upload. Have not moved. Error: " + uploadResponse.getError() + " Status: " + uploadResponse.getStatus());
