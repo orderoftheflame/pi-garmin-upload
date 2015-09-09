@@ -53,20 +53,22 @@ public class GarminUploadApp {
 
                 LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
 
-                final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
+                if (file.getName().endsWith(".fit") || file.getName().endsWith(".gpx")) {
+                    final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
 
-                LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
+                    LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
 
-                if (uploadResponse.getError() == null) {
-                    LOG.info("Upload appears to have been successful, deleting file.");
-                    try {
-                        Files.move(file.toPath(), file.toPath().resolveSibling(file.getName() + "_uploaded"));
-                    } catch (IOException e) {
-                        LOG.error("Failed to move", e);
+                    if (uploadResponse.getError() == null) {
+                        LOG.info("Upload appears to have been successful, deleting file.");
+                        try {
+                            Files.move(file.toPath(), file.toPath().resolveSibling(file.getName() + "_uploaded"));
+                        } catch (IOException e) {
+                            LOG.error("Failed to move", e);
+                        }
+                        file.renameTo(new File(file.getAbsolutePath() + "_uploaded"));
+                    } else {
+                        LOG.error("File failed to upload. Have not moved. Error: " + uploadResponse.getError() + " Status: " + uploadResponse.getStatus());
                     }
-                    file.renameTo(new File(file.getAbsolutePath() + "_uploaded"));
-                } else {
-                    LOG.error("File failed to upload. Have not moved. Error: " + uploadResponse.getError() + " Status: " + uploadResponse.getStatus());
                 }
 
             }
