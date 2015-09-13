@@ -53,7 +53,7 @@ public class GarminUploadApp {
 
                 LOG.info("Attempting to upload file #" + fileCount++ + " for device " + deviceName);
 
-                if (file.getName().endsWith(".fit") || file.getName().endsWith(".gpx")) {
+                if (file.getName().toLowerCase().endsWith(".fit")) {
                     final StravaUploadResponse uploadResponse = strava.upload(null, null, null, PRIVATE_DEBUG, false, DATA_TYPE, null, file);
 
                     LOG.debug("*** UPLOAD RESPONSE: " + uploadResponse.getStatus());
