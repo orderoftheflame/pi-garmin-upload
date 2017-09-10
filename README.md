@@ -26,6 +26,10 @@ Find the device(s) using `ls -l /dev/disk/by-label` and create a new entry in `/
 LABEL=GARMINFR15         /media/fr15     vfat    defaults          0       0
 ```
 ## Setup
+### Install java
+```
+sudo apt-get update && sudo apt-get install oracle-java7-jdk
+```
 ### Clone repo
 Clone the repository into `/home/pi` (or another location and change paths in filepaths in files).
 ### Copy udev rules
