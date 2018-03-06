@@ -1,5 +1,5 @@
 # pi-garmin-upload
-Uploads from a connected Garmin GPS device to strava.
+Automatically uploads activities from a connected Garmin GPS device to strava. Allowing the Pi to be used as a plug and forget charging / uploading station.
 
 Currently the udev and properties file support the Edge 500 and Forerunner 15 devices, but adding new devices should be simple.
 
@@ -41,3 +41,6 @@ And then reload the udev rules with:
 ```
 $ sudo udevadm control --reload-rules
 ```
+### Usage
+
+When a device is plugged in, the udev rules should pick up that is has been connected and run the scripts. These ensure that the device folders are mounted correctly, before calling the java application. This is an extremely simple app that loads the activity files from the device and then submits them to the strava api.
