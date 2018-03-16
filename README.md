@@ -23,7 +23,7 @@ The last part of the property should match the last part of the device path.
 ## Mounting device
 Find the device(s) using `ls -l /dev/disk/by-label` and create a new entry in `/etc/fstab` using your editor of choice.
 ```
-LABEL=GARMINFR15         /media/fr15     vfat    defaults          0       0
+LABEL=GARMINFR15         /media/fr15     vfat    defaults,nofail          0       0
 ```
 ## Setup
 ### Install java
