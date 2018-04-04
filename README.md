@@ -45,3 +45,15 @@ $ sudo udevadm control --reload-rules
 ### Usage
 
 When a device is plugged in, the udev rules should pick up that is has been connected and run the scripts. These ensure that the device folders are mounted correctly, before calling the java application. This is an extremely simple app that loads the activity files from the device and then submits them to the strava api.
+
+### Multiple users
+Duplicate `api.properties` file, renaming it to another name (e.g. `sarah.properties`) and changing the properties as appropriate. Then modify the file copied earlier `/etc/udev/rules.d/8-garmin-device.rules`, and modify the final argument to match the file name.
+
+```
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="276f", RUN+="/home/pi/pi-garmin-upload/scripts/run.sh /media/fr15 api"
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="240c", RUN+="/home/pi/pi-garmin-upload/scripts/run.sh /media/e500 sarah"
+```
+And then reload the udev rules with:
+```
+$ sudo udevadm control --reload-rules
+```
